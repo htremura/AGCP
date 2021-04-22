@@ -20,6 +20,26 @@
 #define direction 7
 #define pulsing 9
 int ovf;
+void pcint_init() {
+	PCICR |= (1<<PCIE2);
+	PCMSK2 |= (1 << PCINT20) | (1 << PCINT21);
+}
+
+ISR(PCINT20_vect) {
+	if(~(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch))))) {
+		pwm_set_duty(0);
+		DDRB &= ~(1 << pulsing-8);
+		portd_bit_clear(direction);
+	}
+}
+
+ISR(PCINT21_vect) {
+	if(~(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch))))) {
+		pwm_set_duty(0);
+		DDRB &= ~(1 << pulsing-8);
+		portd_bit_clear(direction);
+	}
+}
 
 // TIMER0/DEBUG
 void timerdel_init(){
@@ -76,6 +96,7 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 	if((rxbuf[0] == 'S' || rxbuf[0] == 's' )) {							// If the first char is 'S' we will STOP the driving motor
 		pwm_set_duty(0);
 		DDRB &= ~(1 << pulsing-8);
+		portd_bit_clear(direction);
 	}																	//
 	else if(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch)))) {
 		if(rxbuf[0] == 'F' || rxbuf[0] == 'f') {						// If the first char is 'S' we will STOP the driving motor
@@ -122,6 +143,7 @@ int main(void)
 	usart_init();
 	usart_redir();
 	pwm_init();
+	pcint_init();
 	pwm_set_duty(0);											// Turn off driving when init
 	timerdel_init();											// Enable Delay Timer
 	sei();														// Enable interrupts
