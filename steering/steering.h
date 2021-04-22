@@ -41,8 +41,8 @@ void portd_bit_clear(uint8_t x);
 /////
 
 // TIMER1/PWM
-void pwm_init();
-extern void pwm_isr();
+void pulse_timer_init();
+extern void pulse_timer_isr();
 
 /////
 
@@ -59,9 +59,9 @@ int len;
 /////
 
 //PWM for steering
-void pwm_init();
-void pwm_set_spd(int);
-void pwm_isr();
+void pulse_timer_init();
+void pulse_timer_set_spd(int);
+void pulse_timer_isr();
 volatile int steps;
 void pulse();
 volatile int infinite;

@@ -107,12 +107,12 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 																		//
 		if(rxbuf[1] == 'F' || rxbuf[1] == 'f' ) {						// If the next char is 'F' we will be changing to a fast speeds
 			if (len == 2) {												// If the message is 2 characters we are going FAST
-				pwm_set_spd(1500);										// Spd = 1.5khz
+				pulse_timer_set_spd(1500);										// Spd = 1.5khz
 				sei();													// Enable interrupts
 //				printf("GOING FAST\n");									// Print Message to serial saying we are going FAST
 			}															//
 			else if(rxbuf[2] == 'F' || rxbuf[2] == 'f' ) {				// If the there are not 2 characters and the third character is F we are going very fast
-				pwm_set_spd(2000);										// Spd = 2khz
+				pulse_timer_set_spd(2000);										// Spd = 2khz
 				sei();													// Enable interrupts
 //				printf("GOING VERY FAST\n");							// Print Message to serial saying we are going VERY FAST
 			}															//
@@ -123,13 +123,13 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 		}																//
 																		//
 		else if(rxbuf[1] == 'M' || rxbuf[1] == 'm' ) {					// If the next char is 'M' we will be changing to MEDIUM rotation
-			pwm_set_spd(1000);											// Spd = 1khz
+			pulse_timer_set_spd(1000);											// Spd = 1khz
 			sei();														// Enable interrupts
 //			printf("GOING MEDIUM\n");									// Print Message to serial saying we are going medium
 		}																//
 																		//
 		else if(rxbuf[1] == 'S' || rxbuf[1] == 's' ) {					// If the next char is 'S' we will be changing to SLOW rotation
-			pwm_set_spd(500);											// Spd = 500hz
+			pulse_timer_set_spd(500);											// Spd = 500hz
 			sei();														// Enable interrupts
 //			printf("GOING SLOW\n");										// Print Message to serial saying we are going slow
 		}																//
@@ -142,7 +142,7 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 			else if (spd > 2047) {										// If the frequency is above 2047 reset it to 2047
 				spd = 2047;												// 
 			}															// 
-			pwm_set_spd(spd);											// spd = custom
+			pulse_timer_set_spd(spd);											// spd = custom
 			sei();														// Enable interrupts
 //			printf("GOING %d hz\n", spd);								// Print Message to serial saying we are going slow
 		}																//
@@ -182,8 +182,8 @@ int main(void)
 	// Initialize UART
 	usart_init();
 	usart_redir();
-	pwm_init();
-	pwm_set_spd(1000);											// Spd = 1khz
+	pulse_timer_init();
+	pulse_timer_set_spd(1000);											// Spd = 1khz
 	timerdel_init();											// Enable Delay Timer
 	sei();														// Enable interrupts
 	portd_bit_write(disable);
