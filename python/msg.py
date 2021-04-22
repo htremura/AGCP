@@ -12,6 +12,6 @@ def write_read(x):
     data5 = arduino.readline()
     return data1 + data2 + data3 + data4 + data5
 while True:
-    num = input("Enter a number: ") # Taking input from user
-    value = write_read(num)
+    message = input("Send a message: ") # Taking input from user
+    value = write_read(message)
     print(value) # printing the value
