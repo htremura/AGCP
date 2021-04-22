@@ -1,3 +1,5 @@
+.gitignore
 driving/output/driving.hex
 driving/output/driving.elf
 steering/output/steering.elf
+steering/output/steering.hex
