@@ -90,16 +90,6 @@ void pwm_set_duty(int d) {
 	DDRB |= (1 << DDB1);
 }																	// 
 
-void pulse(int p) {													// Function to pulse the motor a given number of times
-	steps = 2*p;													// Multiply the input by 2 because we must toggle on AND off that many times
-	if ((p == -1)) {steps = 0; infinite = 1;}						// If steps = -1 then we set steps to 0 and enable the infinite flag
-	else {infinite = 0;}											// Turn off the infinite flag otherwise
-	if (p != 0) DDRB |= (1 << DDB1);								// if steps != 0
-	else if (p == 0) {
-		DDRB &= (0 << DDB1);
-	}
-}																	// If we are not asking for 0 steps enable the output pin
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // USART FUNCTIONS

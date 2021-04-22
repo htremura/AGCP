@@ -60,7 +60,7 @@ int len;
 
 //PWM for driving
 void pwm_init();
-void pwm_set_spd(int);
+void pwm_set_duty(int);
 void pwm_isr();
 volatile int steps;
 volatile int infinite;

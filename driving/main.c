@@ -116,7 +116,7 @@ int main(void)
 	usart_init();
 	usart_redir();
 	pwm_init();
-	pwm_set_duty(0);											// Spd = 1khz
+	pwm_set_duty(0);											// Turn off driving when init
 	timerdel_init();											// Enable Delay Timer
 	sei();														// Enable interrupts
 	DDRB &= ~(1 << pulsing-8);
