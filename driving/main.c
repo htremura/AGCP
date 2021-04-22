@@ -15,7 +15,8 @@
 // 2/PORTD2 IS DISABLE
 // 7/PORTD7 IS DIRECTION
 // 9/PORTB1 IS PULSING
-#define disable 2
+#define ReverseSwitch 4
+#define ForwardSwitch 5
 #define direction 7
 #define pulsing 9
 int ovf;
@@ -72,18 +73,22 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 //	printf("=\n");														// Send confirmation of message receive
 	len = strlen(rxbuf);												// Save length of string to determine behavior
 	
-	if(rxbuf[0] == 'S' || rxbuf[0] == 's' ) {							// If the first char is 'S' we will STOP the driving motor
+	if((rxbuf[0] == 'S' || rxbuf[0] == 's' )) {							// If the first char is 'S' we will STOP the driving motor
 		pwm_set_duty(0);
 		DDRB &= ~(1 << pulsing-8);
 	}																	//
-	else if(rxbuf[0] == 'F' || rxbuf[0] == 'f' ) {						// If the first char is 'S' we will STOP the driving motor
-		pwm_set_duty(findnum(rxbuf));
-		DDRB |= (1 << pulsing-8);
-	}																	//
-	else if(rxbuf[0] == 'R' || rxbuf[0] == 'r' ) {						// If the first char is 'S' we will STOP the driving motor
-		pwm_set_duty(findnum(rxbuf));
-		DDRB |= (1 << pulsing-8);
-	}																	//
+	else if((PIND & (1 << ForwardSwitch)) && (PIND & (1<<ReverseSwitch))) {
+		else if(rxbuf[0] == 'F' || rxbuf[0] == 'f') {						// If the first char is 'S' we will STOP the driving motor
+			pwm_set_duty(findnum(rxbuf));
+			portd_bit_clear(direction);
+			DDRB |= (1 << pulsing-8);									//
+		}																//
+		else if(rxbuf[0] == 'R' || rxbuf[0] == 'r')) {					// If the first char is 'S' we will STOP the driving motor
+			pwm_set_duty(findnum(rxbuf));								//
+			portd_bit_set(direction);									//
+			DDRB |= (1 << pulsing-8);									//
+		}																//
+	}
 	else {																//
 //		printf("Invalid Message\n");									//
 	}																	//
@@ -111,6 +116,7 @@ int main(void)
 	
 	portd_init();
 	portd_write(0x00);
+	DDRD &= ~((1<<ForwardSwitch) | (1<<ReverseSwitch));
 	
 	// Initialize UART
 	usart_init();
