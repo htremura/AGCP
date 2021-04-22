@@ -88,7 +88,7 @@ void pwm_set_duty(int d) {
 	int duty = (0x03FF/100)*d;
 	OCR1A = duty & (0x03FF);
 	DDRB |= (1 << DDB1);
-}																// 
+}																	// 
 
 void pulse(int p) {													// Function to pulse the motor a given number of times
 	steps = 2*p;													// Multiply the input by 2 because we must toggle on AND off that many times
