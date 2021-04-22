@@ -77,13 +77,13 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 		pwm_set_duty(0);
 		DDRB &= ~(1 << pulsing-8);
 	}																	//
-	else if((PIND & (1 << ForwardSwitch)) && (PIND & (1<<ReverseSwitch))) {
-		else if(rxbuf[0] == 'F' || rxbuf[0] == 'f') {						// If the first char is 'S' we will STOP the driving motor
+	else if(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch)))) {
+		if(rxbuf[0] == 'F' || rxbuf[0] == 'f') {						// If the first char is 'S' we will STOP the driving motor
 			pwm_set_duty(findnum(rxbuf));
 			portd_bit_clear(direction);
 			DDRB |= (1 << pulsing-8);									//
 		}																//
-		else if(rxbuf[0] == 'R' || rxbuf[0] == 'r')) {					// If the first char is 'S' we will STOP the driving motor
+		else if(rxbuf[0] == 'R' || rxbuf[0] == 'r') {					// If the first char is 'S' we will STOP the driving motor
 			pwm_set_duty(findnum(rxbuf));								//
 			portd_bit_set(direction);									//
 			DDRB |= (1 << pulsing-8);									//
