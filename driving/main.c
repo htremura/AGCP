@@ -73,10 +73,16 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 	len = strlen(rxbuf);												// Save length of string to determine behavior
 	
 	if(rxbuf[0] == 'S' || rxbuf[0] == 's' ) {							// If the first char is 'S' we will STOP the driving motor
-		pwm_set_duty(20);
+		pwm_set_duty(0);
+		DDRB &= ~(1 << pulsing-8);
 	}																	//
 	else if(rxbuf[0] == 'F' || rxbuf[0] == 'f' ) {						// If the first char is 'S' we will STOP the driving motor
-		pwm_set_duty(50);
+		pwm_set_duty(findnum(rxbuf));
+		DDRB |= (1 << pulsing-8);
+	}																	//
+	else if(rxbuf[0] == 'R' || rxbuf[0] == 'r' ) {						// If the first char is 'S' we will STOP the driving motor
+		pwm_set_duty(findnum(rxbuf));
+		DDRB |= (1 << pulsing-8);
 	}																	//
 	else {																//
 //		printf("Invalid Message\n");									//
@@ -113,7 +119,7 @@ int main(void)
 	pwm_set_duty(0);											// Spd = 1khz
 	timerdel_init();											// Enable Delay Timer
 	sei();														// Enable interrupts
-	portd_bit_set(disable);
+	DDRB &= ~(1 << pulsing-8);
 	
     while (1);
 	
