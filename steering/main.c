@@ -5,7 +5,7 @@
  * Author : heitor tremura
  */ 
 
-#include "steering.h"			// Include definitions of all vars
+#include "comms.h"			// Include definitions of all vars
 #include <avr/interrupt.h>	// Include interrupts library
 #include <stdio.h>			// Include library for C terminal communication
 #include <string.h>			// Include library for working with strings.
@@ -74,7 +74,7 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 	
 	if(rxbuf[0] == 'S' || rxbuf[0] == 's' ) {							// If the first char is 'S' we will STOP the steering motor
 		portd_bit_clear(direction);										// DIRECTION LOW
-		portd_bit_write(disable);										// DISABLE HIGH
+		portd_bit_set(disable);										// DISABLE HIGH
 		pulse(0);														// Stops Pulsing
 		sei();															// Enable interrupts
 //		printf("STOPPING\n");											// Print Message to serial saying we are STOPPING
@@ -92,7 +92,7 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 																		//
 		else if(rxbuf[1] == 'L' || rxbuf[1] == 'l' ) {					// If the second char is L we will turn Left
 			portd_bit_clear(disable);									// DISABLE LOW
-			portd_bit_write(direction);									// DIRECTION HIGH
+			portd_bit_set(direction);									// DIRECTION HIGH
 			pulse(findnum(rxbuf));										// Pulses a number of times
 			sei();														// Enable interrupts
 //			printf("TURNING LEFT %d PULSES\n", (findnum(rxbuf)));		// Print Message to serial saying we are turning right
@@ -186,7 +186,7 @@ int main(void)
 	pulse_timer_set_spd(1000);											// Spd = 1khz
 	timerdel_init();											// Enable Delay Timer
 	sei();														// Enable interrupts
-	portd_bit_write(disable);
+	portd_bit_set(disable);
 	
     while (1);
 	
