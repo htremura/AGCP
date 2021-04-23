@@ -5,8 +5,6 @@
  *  Author: heitor tremura
  */ 
 
-#include <stdio.h>				// Include standard libraries
-#include <avr/io.h>				// 
 #include <avr/interrupt.h>		// 
 #include "driving.h"			// 
 
