@@ -8,7 +8,7 @@
 #ifndef STEERING_H_
 #define STEERING_H_
 
-#include "comms.h"
+#include "../comms/comms.h"
 
 // TIMER1/PULSING
 void pulse_timer_init();
