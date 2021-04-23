@@ -40,15 +40,6 @@ void portd_bit_clear(uint8_t x);
 
 /////
 
-// TIMER1/PULSING/PWM
-void pulse_timer_init();
-extern void pulse_timer_isr();
-void pwm_init();
-void pwm_isr();
-void pwm_set_duty(int d);
-
-/////
-
 // USART
 void usart_init();
 void usart_tx(unsigned char);
@@ -58,15 +49,5 @@ char usart_scanchar(FILE *);
 void usart_redir();
 void usart_isr();
 int len;
-
-/////
-
-//Pulsing for steering
-void pulse_timer_init();
-void pulse_timer_set_spd(int);
-void pulse_timer_isr();
-volatile int steps;
-void pulse();
-volatile int infinite;
 
 #endif /* COMMS_H_ */

@@ -5,7 +5,7 @@
  * Author : heitor tremura
  */ 
 
-#include "comms.h"			// Include definitions of all vars
+#include "driving.h"			// Include definitions of all vars
 #include <avr/interrupt.h>	// Include interrupts library
 #include <stdio.h>			// Include library for C terminal communication
 #include <string.h>			// Include library for working with strings.
