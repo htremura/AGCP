@@ -1,3 +1,4 @@
+.PHONY: steering steering_make steering_flash driving driving_make driving_flash
 all: steering/main.c steering/steering.c steering/steering.h driving/main.c driving/driving.c driving/driving.h
 	avr-gcc -mmcu=atmega328p steering/steering.c steering/main.c -o steering/output/steering.elf
 	avr-objcopy -h -S steering/output/steering.elf > steering/output/steering.lst
