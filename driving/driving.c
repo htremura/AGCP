@@ -33,6 +33,8 @@ void pwm_isr() {													// The function that gets called by the TIMER1_OVF_
 }																	// 
 
 void pwm_set_duty(int d) {
+	if (d > 80) d = 80;
+	if (d < 20) d = 20;
 	int duty = (0x03FF/100)*d;
 	OCR1A = duty & (0x03FF);
 	DDRB |= (1 << DDB1);
