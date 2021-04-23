@@ -64,7 +64,7 @@ void portd_bit_clear(uint8_t x){	// Function to AND into PORTD
 
 // TIMERS FUNCTIONS
 
-// For Steering
+// For Driving
 
 // Overflow Interrupt
 ISR(TIMER1_OVF_vect) {
