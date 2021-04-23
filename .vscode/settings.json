@@ -1,7 +1,10 @@
 {
     "files.associations": {
         "string.h": "c",
-        "comms.h": "c"
+        "comms.h": "c",
+        "io.h": "c",
+        "interrupt.h": "c",
+        "steering.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
