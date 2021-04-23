@@ -30,12 +30,12 @@ extern void rx_error_callback();
 // PORTB
 void portb_init();
 void portb_write(uint8_t x);
-void portb_bit_write(uint8_t x);
+void portb_bit_set(uint8_t x);
 void portb_bit_clear(uint8_t x);
 // PORTD
 void portd_init();
 void portd_write(uint8_t x);
-void portd_bit_write(uint8_t x);
+void portd_bit_set(uint8_t x);
 void portd_bit_clear(uint8_t x);
 
 /////

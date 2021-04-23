@@ -1,12 +1,12 @@
 /*
- * driving.h
+ * comms.h
  *
  * 
  *  Author: heitor tremura
  */ 
 
-#ifndef DRIVING_H_
-#define DRIVING_H_
+#ifndef COMMS_H_
+#define COMMS_H_
 
 #include <stdio.h>
 
@@ -41,8 +41,8 @@ void portd_bit_clear(uint8_t x);
 /////
 
 // TIMER1/PWM
-void pwm_init();
-extern void pwm_isr();
+void pulse_timer_init();
+extern void pulse_timer_isr();
 
 /////
 
@@ -58,11 +58,12 @@ int len;
 
 /////
 
-//PWM for driving
-void pwm_init();
-void pwm_set_duty(int);
-void pwm_isr();
+//Pulsing for steering
+void pulse_timer_init();
+void pulse_timer_set_spd(int);
+void pulse_timer_isr();
 volatile int steps;
+void pulse();
 volatile int infinite;
 
-#endif /* DRIVING_H_ */
+#endif /* COMMS_H_ */
