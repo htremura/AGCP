@@ -40,9 +40,12 @@ void portd_bit_clear(uint8_t x);
 
 /////
 
-// TIMER1/PWM
+// TIMER1/PULSING/PWM
 void pulse_timer_init();
 extern void pulse_timer_isr();
+void pwm_init();
+void pwm_isr();
+void pwm_set_duty(int d);
 
 /////
 
