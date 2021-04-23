@@ -1,12 +1,12 @@
 /*
- * steering.h
+ * comms.h
  *
  * 
  *  Author: heitor tremura
  */ 
 
-#ifndef STEERING_H_
-#define STEERING_H_
+#ifndef COMMS_H_
+#define COMMS_H_
 
 #include <stdio.h>
 
@@ -58,7 +58,7 @@ int len;
 
 /////
 
-//PWM for steering
+//Pulsing for steering
 void pulse_timer_init();
 void pulse_timer_set_spd(int);
 void pulse_timer_isr();
@@ -66,4 +66,4 @@ volatile int steps;
 void pulse();
 volatile int infinite;
 
-#endif /* STEERING_H_ */
+#endif /* COMMS_H_ */
