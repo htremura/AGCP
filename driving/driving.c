@@ -8,7 +8,7 @@
 #include <stdio.h>				// Include standard libraries
 #include <avr/io.h>				// 
 #include <avr/interrupt.h>		// 
-#include "comms.h"				// 
+#include "driving.h"			// 
 
 // TIMERS FUNCTIONS
 

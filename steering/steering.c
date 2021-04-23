@@ -8,7 +8,7 @@
 #include <stdio.h>				// Include standard libraries
 #include <avr/io.h>				// 
 #include <avr/interrupt.h>		// 
-#include "comms.h"				// 
+#include "steering.h"			// 
 
 // For steering
 volatile int steps = 0;			// Global steps used to control how many pulses should come from pin
