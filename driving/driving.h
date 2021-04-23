@@ -8,7 +8,7 @@
 #ifndef DRIVING_H_
 #define DRIVING_H_
 
-#include "comms.h"
+#include "../comms/comms.h"
 
 // TIMER1/PULSING/PWM
 void pwm_init();
