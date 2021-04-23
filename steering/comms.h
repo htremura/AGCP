@@ -50,14 +50,4 @@ void usart_redir();
 void usart_isr();
 int len;
 
-/////
-
-//Pulsing for steering
-void pulse_timer_init();
-void pulse_timer_set_spd(int);
-void pulse_timer_isr();
-volatile int steps;
-void pulse();
-volatile int infinite;
-
 #endif /* COMMS_H_ */
