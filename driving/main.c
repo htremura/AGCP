@@ -103,7 +103,7 @@ void rx_done_callback(char *rxbuf) {										// Arduino will perform some funct
 			int d = findnum(rxbuf);											//
 			if (d > 80) d = 80;												//
 			if (d < 20) d = 20;												//
-			pwm_set_duty(d);													//
+			pwm_set_duty(d);												//
 			portd_bit_clear(direction);										//
 			DDRB |= (1 << pulsing-8);										//
 		}																	//
@@ -111,7 +111,7 @@ void rx_done_callback(char *rxbuf) {										// Arduino will perform some funct
 			int d = findnum(rxbuf);											//
 			if (d > 80) d = 80;												//
 			if (d < 20) d = 20;												//
-			pwm_set_duty(d);									//
+			pwm_set_duty(d);												//
 			portd_bit_set(direction);										//
 			DDRB |= (1 << pulsing-8);										//
 		}																	//
