@@ -86,39 +86,39 @@ int findnum(char *rxbuf) {							// Function for selecting the number that comes
 	return num;
 }
 
-void rx_done_callback(char *rxbuf) {									// Arduino will perform some functionality when END_OF_MSG char is detected
-	timerdel_start();													// Start the delay timer
-	cli();																// Disable interrupts while processing is happening
-//	printf("MCU received %s\n", rxbuf);									// Reply to received message with the information in the buffer (The received message)
-//	printf("=\n");														// Send confirmation of message receive
-	len = strlen(rxbuf);												// Save length of string to determine behavior
+void rx_done_callback(char *rxbuf) {										// Arduino will perform some functionality when END_OF_MSG char is detected
+	timerdel_start();														// Start the delay timer
+	cli();																	// Disable interrupts while processing is happening
+//	printf("MCU received %s\n", rxbuf);										// Reply to received message with the information in the buffer (The received message)
+//	printf("=\n");															// Send confirmation of message receive
+	len = strlen(rxbuf);													// Save length of string to determine behavior
 	
-	if((rxbuf[0] == 'S' || rxbuf[0] == 's' )) {							// If the first char is 'S' we will STOP the driving motor
+	if((rxbuf[0] == 'S' || rxbuf[0] == 's' )) {								// If the first char is 'S' we will STOP the driving motor
 		pwm_set_duty(0);
 		DDRB &= ~(1 << pulsing-8);
 		portd_bit_clear(direction);
-	}																	//
-	else if(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch)))) {
-		if(rxbuf[0] == 'F' || rxbuf[0] == 'f') {						// If the first char is 'S' we will STOP the driving motor
-			pwm_set_duty(findnum(rxbuf));
-			portd_bit_clear(direction);
-			DDRB |= (1 << pulsing-8);									//
-		}																//
-		else if(rxbuf[0] == 'R' || rxbuf[0] == 'r') {					// If the first char is 'S' we will STOP the driving motor
-			pwm_set_duty(findnum(rxbuf));								//
-			portd_bit_set(direction);									//
-			DDRB |= (1 << pulsing-8);									//
-		}																//
-	}
-	else {																//
-//		printf("Invalid Message\n");									//
-	}																	//
-	sei();																// Enable interrupts
-	timerdel_stop();													// Stop the delay timer
-	timerdel_print();													// Print the delay timer
-	timerdel_rst();														// Reset the delay timer
-																		//
-}																		//
+	}																		//
+	else if(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch)))) {	//
+		if(rxbuf[0] == 'F' || rxbuf[0] == 'f') {							// If the first char is 'F' we will be driving forward
+			pwm_set_duty(findnum(rxbuf));									//
+			portd_bit_clear(direction);										//
+			DDRB |= (1 << pulsing-8);										//
+		}																	//
+		else if(rxbuf[0] == 'R' || rxbuf[0] == 'r') {						// If the first char is 'R' we will be reversing
+			pwm_set_duty(findnum(rxbuf));									//
+			portd_bit_set(direction);										//
+			DDRB |= (1 << pulsing-8);										//
+		}																	//
+	}																		//
+	else {																	//
+//		printf("Invalid Message\n");										//
+	}																		//
+	sei();																	// Enable interrupts
+	timerdel_stop();														// Stop the delay timer
+	timerdel_print();														// Print the delay timer
+	timerdel_rst();															// Reset the delay timer
+																			//
+}																			//
 
 // Return a ? if the message in the buffer is too large.
 void rx_error_callback(char *rxbuf) {
