@@ -46,7 +46,6 @@ void timerdel_init(){
 	TIMSK0 |= (1 << TOIE0);
 }
 void timerdel_start(){
-	ovf = 0;
 	TCCR0B |= (1 << CS00);
 }
 void timerdel_stop(){
@@ -56,6 +55,7 @@ void timerdel_print(){
 	printf("%d", (TCNT0+256*ovf));
 }
 void timerdel_rst(){
+	ovf = 0;
 	TCNT0 = 0;
 }
 ISR(TIMER0_OVF_vect) {
