@@ -115,7 +115,7 @@ except KeyboardInterrupt:
     pass
 finally:
 
-    t = open(writefile+"a.txt", "w+")
+    t = open("steer_" + writefile + "a.txt", "w+")
     t.write(\
     "TR avg: " + str(np.average(data.rl)*(1/(16000000))*10**6) + " us\nTR5 avg: " + str(np.average(data.r5l)*(1/(16000000))*10**6) + "us\nTR50 avg: " + str(np.average(data.r50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
     "us\n\nTL avg: " + str(np.average(data.ll)*(1/(16000000))*10**6) + "us\nTL5 avg: " + str(np.average(data.l5l)*(1/(16000000))*10**6) + "us\nTL50 avg: " + str(np.average(data.l50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
@@ -125,7 +125,7 @@ finally:
 
     fields   = np.matrix(['TR', 'TR5', 'TR50', 'TR100', 'TL', 'TL5', 'TL50', 'TL100', 'INV', 'VF', 'VFF', 'VM', 'VS', 'VC500', 'VC1500', 'S'])
     complete = np.matrix([data.rl, data.r5l, data.r50l, data.r100l, data.ll, data.l5l, data.l50l, data.r100l, data.invl, data.vfl, data.vffl, data.vml, data.vsl, data.vc500l, data.vc1500l, data.sl])
-    with open(writefile + "np.csv", "a") as analysis:
+    with open("steer_" + writefile + "np.csv", "a") as analysis:
 #        analysis.write(str(fields) + "\n")
         np.savetxt(analysis, np.hstack(fields), delimiter=",", fmt="%s")
         np.savetxt(analysis, np.transpose(complete), delimiter=",", fmt='%1.0f')
