@@ -74,9 +74,8 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 	
 	if(rxbuf[0] == 'S' || rxbuf[0] == 's' ) {							// If the first char is 'S' we will STOP the steering motor
 		portd_bit_clear(direction);										// DIRECTION LOW
-		portd_bit_set(disable);										// DISABLE HIGH
+		portd_bit_set(disable);											// DISABLE HIGH
 		pulse(0);														// Stops Pulsing
-		sei();															// Enable interrupts
 //		printf("STOPPING\n");											// Print Message to serial saying we are STOPPING
 	}
 	
@@ -86,7 +85,6 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 			portd_bit_clear(disable);									// DISABLE LOW
 			portd_bit_clear(direction);									// DIRECTION LOW
 			pulse(findnum(rxbuf));										// Pulses a number of times
-			sei();														// Enable interrupts
 //			printf("TURNING RIGHT %d PULSES\n", (findnum(rxbuf)));		// Print Message to serial saying we are turning right
 		}																//
 																		//
@@ -94,11 +92,9 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 			portd_bit_clear(disable);									// DISABLE LOW
 			portd_bit_set(direction);									// DIRECTION HIGH
 			pulse(findnum(rxbuf));										// Pulses a number of times
-			sei();														// Enable interrupts
 //			printf("TURNING LEFT %d PULSES\n", (findnum(rxbuf)));		// Print Message to serial saying we are turning right
 		}																//
 		else {
-			sei();														// Enable interrupts
 //			printf("Invalid Turning Message\n");						// Print Message to serial saying we are going VERY FAST
 		}
 	}																	//
@@ -107,30 +103,25 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 																		//
 		if(rxbuf[1] == 'F' || rxbuf[1] == 'f' ) {						// If the next char is 'F' we will be changing to a fast speeds
 			if (len == 2) {												// If the message is 2 characters we are going FAST
-				pulse_timer_set_spd(1500);										// Spd = 1.5khz
-				sei();													// Enable interrupts
+				pulse_timer_set_spd(1500);								// Spd = 1.5khz
 //				printf("GOING FAST\n");									// Print Message to serial saying we are going FAST
 			}															//
 			else if(rxbuf[2] == 'F' || rxbuf[2] == 'f' ) {				// If the there are not 2 characters and the third character is F we are going very fast
-				pulse_timer_set_spd(2000);										// Spd = 2khz
-				sei();													// Enable interrupts
+				pulse_timer_set_spd(2000);								// Spd = 2khz
 //				printf("GOING VERY FAST\n");							// Print Message to serial saying we are going VERY FAST
 			}															//
 			else {														//
-				sei();													// Enable interrupts
 //				printf("Invalid Fast Velocity Message\n");				// Print Message to serial saying we are going VERY FAST
 			}
 		}																//
 																		//
 		else if(rxbuf[1] == 'M' || rxbuf[1] == 'm' ) {					// If the next char is 'M' we will be changing to MEDIUM rotation
-			pulse_timer_set_spd(1000);											// Spd = 1khz
-			sei();														// Enable interrupts
+			pulse_timer_set_spd(1000);									// Spd = 1khz
 //			printf("GOING MEDIUM\n");									// Print Message to serial saying we are going medium
 		}																//
 																		//
 		else if(rxbuf[1] == 'S' || rxbuf[1] == 's' ) {					// If the next char is 'S' we will be changing to SLOW rotation
-			pulse_timer_set_spd(500);											// Spd = 500hz
-			sei();														// Enable interrupts
+			pulse_timer_set_spd(500);									// Spd = 500hz
 //			printf("GOING SLOW\n");										// Print Message to serial saying we are going slow
 		}																//
 																		//
@@ -142,19 +133,17 @@ void rx_done_callback(char *rxbuf) {									// Arduino will perform some functi
 			else if (spd > 2047) {										// If the frequency is above 2047 reset it to 2047
 				spd = 2047;												// 
 			}															// 
-			pulse_timer_set_spd(spd);											// spd = custom
-			sei();														// Enable interrupts
+			pulse_timer_set_spd(spd);									// spd = custom
 //			printf("GOING %d hz\n", spd);								// Print Message to serial saying we are going slow
 		}																//
 		else {															//
-			sei();														// Enable interrupts
 //			printf("Invalid Velocity Message\n");						// Print a message if an invalid velocity message is received
 		}																//
 	}																	//
 	else {																//
-		sei();															// Enable interrupts
 //		printf("Invalid Message\n");									//
 	}																	//
+	sei();																// Enable interrupts
 	timerdel_stop();													// Stop the delay timer
 	timerdel_print();													// Print the delay timer
 	timerdel_rst();														// Reset the delay timer
