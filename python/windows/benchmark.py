@@ -20,6 +20,8 @@ class data:
     vc500l =   np.array([])
     vc1500l =   np.array([])
 
+    invl =   np.array([])
+
     sl    =   np.array([])
 
 arduino = serial.Serial(port='COM3', baudrate=57600, timeout=.1)
@@ -82,6 +84,10 @@ try:
         data.sl = np.append(data.sl, S/8)
         time.sleep(0.05)
 
+        INV = write_read("INV=")
+        data.invl = np.append(data.invl, int(INV))
+        time.sleep(0.05)
+
         VF = write_read("VF=")
         data.vfl = np.append(data.vfl, int(VF))
         time.sleep(0.05)
@@ -113,11 +119,12 @@ finally:
     t.write(\
     "TR avg: " + str(np.average(data.rl)*(1/(16000000))*10**6) + " us\nTR5 avg: " + str(np.average(data.r5l)*(1/(16000000))*10**6) + "us\nTR50 avg: " + str(np.average(data.r50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
     "us\n\nTL avg: " + str(np.average(data.ll)*(1/(16000000))*10**6) + "us\nTL5 avg: " + str(np.average(data.l5l)*(1/(16000000))*10**6) + "us\nTL50 avg: " + str(np.average(data.l50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
+    "us\n\nINV avg: " + str(np.average(data.invl)*(1/(16000000))*10**6) + \
     "us\n\nVF avg: " + str(np.average(data.vfl)*(1/(16000000))*10**6) + "us\nVFF avg: " + str(np.average(data.vffl)*(1/(16000000))*10**6) + " us\nVM avg: " + str(np.average(data.vml)*(1/(16000000))*10**6) + "us\nVS avg: " + str(np.average(data.vsl)*(1/(16000000))*10**6) + "us\nVC500 avg: " + str(np.average(data.vc500l)*(1/(16000000))*10**6) + " us\nVC1500 avg: " + str(np.average(data.vc1500l)*(1/(16000000))*10**6) + \
     "us\n\nS avg: " + str(np.average(data.sl)*(1/(16000000))*10**6) + "us")
 
-    fields   = np.matrix(['TR', 'TR5', 'TR50', 'TR100', 'TL', 'TL5', 'TL50', 'TL100', 'VF', 'VFF', 'VM', 'VS', 'VC500', 'VC1500', 'S'])
-    complete = np.matrix([data.rl, data.r5l, data.r50l, data.r100l, data.ll, data.l5l, data.l50l, data.r100l, data.vfl, data.vffl, data.vml, data.vsl, data.vc500l, data.vc1500l, data.sl])
+    fields   = np.matrix(['TR', 'TR5', 'TR50', 'TR100', 'TL', 'TL5', 'TL50', 'TL100', 'INV', 'VF', 'VFF', 'VM', 'VS', 'VC500', 'VC1500', 'S'])
+    complete = np.matrix([data.rl, data.r5l, data.r50l, data.r100l, data.ll, data.l5l, data.l50l, data.r100l, data.invl, data.vfl, data.vffl, data.vml, data.vsl, data.vc500l, data.vc1500l, data.sl])
     with open(writefile + "np.csv", "a") as analysis:
 #        analysis.write(str(fields) + "\n")
         np.savetxt(analysis, np.hstack(fields), delimiter=",", fmt="%s")
