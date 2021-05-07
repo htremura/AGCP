@@ -141,7 +141,7 @@ void timerdel_stop(){
   TCCR2B &= 0;
 }
 void timerdel_print(){
-  Serial.println(TCNT2 + (256*ovf));
+  Serial.print(TCNT2 + (256*ovf));
 }
 void timerdel_rst(){
   ovf = 0;
