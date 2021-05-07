@@ -55,7 +55,7 @@ try:
         R_ = write_read("R_=")
         data.r_l = np.append(data.r_l, int(R_))
         time.sleep(0.15)
-        S = int(write_read("S="))
+        S += int(write_read("S="))
         time.sleep(0.05)
 
         R_5 = write_read("R_5=")
