@@ -13,8 +13,9 @@
 
 // PINS!!!
 // 2/PORTD2 IS DISABLE
+// 4/PORTD4 IS REVERSESWITCH
+// 5/PORTD5 IS FORWARDSWITCH
 // 7/PORTD7 IS DIRECTION
-// 9/PORTB1 IS PULSING
 #define ReverseSwitch 4
 #define ForwardSwitch 5
 #define direction 7
