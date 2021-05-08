@@ -128,6 +128,9 @@ void loop()
   {
     analogWrite(Motor,0);
     digitalWrite(DirectionRelay,LOW);
+    timerdel_stop();
+    timerdel_print();
+    timerdel_rst();
   }
   
   if(input.substring(0,input.indexOf(":")) == "R")
