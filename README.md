@@ -16,3 +16,8 @@ This folder contains an implementation of the steering control code using the co
 - driving
 
 This folder contains an implementation of the driving control code using the communications library as well as a driving library.
+
+
+- python
+
+This folder contains scripts which run in python using the pyserial library to test and benchmark the microcontroller's steering and driving implementations
