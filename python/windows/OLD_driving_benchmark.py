@@ -81,11 +81,11 @@ finally:
 
     t = open("olddrive_" + writefile + "a.txt", "w+")
     t.write(\
-    "TR avg: " + str(np.average(data.rl)*(1/(16000000))*10**6) + " us\nTR5 avg: " + str(np.average(data.r5l)*(1/(16000000))*10**6) + "us\nTR50 avg: " + str(np.average(data.r50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
-    "us\n\nF avg: " + str(np.average(data.fl)*(1/(16000000))*10**6) + "us\nF5 avg: " + str(np.average(data.f5l)*(1/(16000000))*10**6) + "us\nF50 avg: " + str(np.average(data.f50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.f100l)*(1/(16000000))*10**6) + \
-    "us\n\nS avg: " + str(np.average(data.sl)*(1/(16000000))*10**6) + "us")
+    "R: avg: " + str(np.average(data.rl)*(1/(16000000))*10**6) + " us\nR:5 avg: " + str(np.average(data.r5l)*(1/(16000000))*10**6) + "us\nR:50 avg: " + str(np.average(data.r50l)*(1/(16000000))*10**6) + " us\nR:100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
+    "us\n\nF: avg: " + str(np.average(data.fl)*(1/(16000000))*10**6) + "us\nF:5 avg: " + str(np.average(data.f5l)*(1/(16000000))*10**6) + "us\nF:50 avg: " + str(np.average(data.f50l)*(1/(16000000))*10**6) + " us\nF:100 avg: " + str(np.average(data.f100l)*(1/(16000000))*10**6) + \
+    "us\n\nS: avg: " + str(np.average(data.sl)*(1/(16000000))*10**6) + "us")
 
-    fields   = np.matrix(['TR', 'TR5', 'TR50', 'TR100', 'F', 'F5', 'F50', 'F100', 'S'])
+    fields   = np.matrix(['R:', 'R:5', 'R:50', 'R:100', 'F:', 'F:5', 'F:50', 'F:100', 'S:'])
     complete = np.matrix([data.rl, data.r5l, data.r50l, data.r100l, data.fl, data.f5l, data.f50l, data.f100l, data.sl])
     with open("olddrive_" + writefile + "np.csv", "a") as analysis:
 #        analysis.write(str(fields) + "\n")
