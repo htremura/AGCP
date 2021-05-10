@@ -17,8 +17,8 @@ class data:
     vffl =   np.array([])
     vml    =   np.array([])
     vsl =   np.array([])
-    vc500l =   np.array([])
-    vc1500l =   np.array([])
+    vc200l =   np.array([])
+    vc1200l =   np.array([])
 
     invl =   np.array([])
 
@@ -104,12 +104,12 @@ try:
         data.vsl = np.append(data.vsl, int(VS))
         time.sleep(0.05)
 
-        VC500 = write_read("VC500=")
-        data.vc500l = np.append(data.vc500l, int(VC500))
+        VC200 = write_read("VC200=")
+        data.vc200l = np.append(data.vc200l, int(VC200))
         time.sleep(0.05)
 
-        VC1500 = write_read("VC1500=")
-        data.vc1500l = np.append(data.vc1500l, int(VC1500))
+        VC1200 = write_read("VC1200=")
+        data.vc1200l = np.append(data.vc1200l, int(VC1200))
         time.sleep(0.05)
 except KeyboardInterrupt:
     pass
@@ -120,11 +120,11 @@ finally:
     "TR avg: " + str(np.average(data.rl)*(1/(16000000))*10**6) + " us\nTR5 avg: " + str(np.average(data.r5l)*(1/(16000000))*10**6) + "us\nTR50 avg: " + str(np.average(data.r50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
     "us\n\nTL avg: " + str(np.average(data.ll)*(1/(16000000))*10**6) + "us\nTL5 avg: " + str(np.average(data.l5l)*(1/(16000000))*10**6) + "us\nTL50 avg: " + str(np.average(data.l50l)*(1/(16000000))*10**6) + " us\nTR100 avg: " + str(np.average(data.r100l)*(1/(16000000))*10**6) + \
     "us\n\nINV avg: " + str(np.average(data.invl)*(1/(16000000))*10**6) + \
-    "us\n\nVF avg: " + str(np.average(data.vfl)*(1/(16000000))*10**6) + "us\nVFF avg: " + str(np.average(data.vffl)*(1/(16000000))*10**6) + " us\nVM avg: " + str(np.average(data.vml)*(1/(16000000))*10**6) + "us\nVS avg: " + str(np.average(data.vsl)*(1/(16000000))*10**6) + "us\nVC500 avg: " + str(np.average(data.vc500l)*(1/(16000000))*10**6) + " us\nVC1500 avg: " + str(np.average(data.vc1500l)*(1/(16000000))*10**6) + \
+    "us\n\nVF avg: " + str(np.average(data.vfl)*(1/(16000000))*10**6) + "us\nVFF avg: " + str(np.average(data.vffl)*(1/(16000000))*10**6) + " us\nVM avg: " + str(np.average(data.vml)*(1/(16000000))*10**6) + "us\nVS avg: " + str(np.average(data.vsl)*(1/(16000000))*10**6) + "us\nVC200 avg: " + str(np.average(data.vc200l)*(1/(16000000))*10**6) + " us\nVC1200 avg: " + str(np.average(data.vc1200l)*(1/(16000000))*10**6) + \
     "us\n\nS avg: " + str(np.average(data.sl)*(1/(16000000))*10**6) + "us")
 
-    fields   = np.matrix(['TR', 'TR5', 'TR50', 'TR100', 'TL', 'TL5', 'TL50', 'TL100', 'INV', 'VF', 'VFF', 'VM', 'VS', 'VC500', 'VC1500', 'S'])
-    complete = np.matrix([data.rl, data.r5l, data.r50l, data.r100l, data.ll, data.l5l, data.l50l, data.r100l, data.invl, data.vfl, data.vffl, data.vml, data.vsl, data.vc500l, data.vc1500l, data.sl])
+    fields   = np.matrix(['TR', 'TR5', 'TR50', 'TR100', 'TL', 'TL5', 'TL50', 'TL100', 'INV', 'VF', 'VFF', 'VM', 'VS', 'VC200', 'VC1200', 'S'])
+    complete = np.matrix([data.rl, data.r5l, data.r50l, data.r100l, data.ll, data.l5l, data.l50l, data.r100l, data.invl, data.vfl, data.vffl, data.vml, data.vsl, data.vc200l, data.vc1200l, data.sl])
     with open("steer_" + writefile + "np.csv", "a") as analysis:
 #        analysis.write(str(fields) + "\n")
         np.savetxt(analysis, np.hstack(fields), delimiter=",", fmt="%s")
