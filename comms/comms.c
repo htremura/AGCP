@@ -29,7 +29,7 @@ void portb_init(){					// Initialization function which sets DDRB to 0xff, i.e. 
 void portb_write(uint8_t x){		// Function to hard write to PORTB
 	PORTB = x;						//
 }									//
-void portb_bit_set(uint8_t x){	// Function to OR into PORTB
+void portb_bit_set(uint8_t x){		// Function to OR into PORTB
 	PORTB |= (1 << x);				//
 }									//
 void portb_bit_clear(uint8_t x){	// Function to AND into PORTB
@@ -43,7 +43,7 @@ void portd_init(){					// Initialization function which sets DDRD to 0xff, i.e. 
 void portd_write(uint8_t x){		// Function to write to PORTD
 	PORTD = x;						// 
 }									//
-void portd_bit_set(uint8_t x){	// Function to OR into PORTD
+void portd_bit_set(uint8_t x){		// Function to OR into PORTD
 	PORTD |= (1 << x);				//
 }									//
 void portd_bit_clear(uint8_t x){	// Function to AND into PORTD
