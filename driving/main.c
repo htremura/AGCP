@@ -96,7 +96,7 @@ void rx_done_callback(char *rxbuf) {										// Arduino will perform some funct
 	
 	if((rxbuf[0] == 'S' || rxbuf[0] == 's' )) {								// If the first char is 'S' we will STOP the driving motor
 		pwm_set_duty(0);
-		DDRB &= ~(1 << pulsing-8);
+		pwm_stop_motor();
 		portd_bit_clear(direction);
 	}																		//
 	else if(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch)))) {	//
@@ -106,7 +106,7 @@ void rx_done_callback(char *rxbuf) {										// Arduino will perform some funct
 			if (d > 80) d = 80;												//
 			if (d < 20) d = 20;												//
 			pwm_set_duty(d);												//
-			DDRB |= (1 << pulsing-8);										//
+			pwm_start_motor();										//
 		}																	//
 		else if(rxbuf[0] == 'R' || rxbuf[0] == 'r') {						// If the first char is 'R' we will be reversing
 			int d = findnum(rxbuf);											//
@@ -114,7 +114,7 @@ void rx_done_callback(char *rxbuf) {										// Arduino will perform some funct
 			if (d > 80) d = 80;												//
 			if (d < 20) d = 20;												//
 			pwm_set_duty(d);												//
-			DDRB |= (1 << pulsing-8);										//
+			pwm_start_motor();										//
 		}																	//
 	}																		//
 	else {																	//
@@ -154,7 +154,7 @@ int main(void)
 	pwm_set_duty(0);											// Turn off driving when init
 	timerdel_init();											// Enable Delay Timer
 	sei();														// Enable interrupts
-	DDRB &= ~(1 << pulsing-8);
+	pwm_stop_motor();
 	
     while (1);
 	

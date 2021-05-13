@@ -14,5 +14,7 @@
 void pwm_init();
 extern void pwm_isr();
 void pwm_set_duty(int d);
+void pwm_start_motor();
+void pwm_stop_motor();
 
 #endif /* DRIVING_H_ */
