@@ -84,14 +84,6 @@ try:
 except KeyboardInterrupt:
     pass
 finally:
-
-    t = open("drive_" + writefile + "a.txt", "w+")
-    t.write(\
-    "R_ avg: " + str(np.average(data.r_l)*(1/(16000000))*10**6) + " us\nR_5 avg: " + str(np.average(data.r_5l)*(1/(16000000))*10**6) + "us\nR_50 avg: " + str(np.average(data.r_50l)*(1/(16000000))*10**6) + " us\nR_100 avg: " + str(np.average(data.r_100l)*(1/(16000000))*10**6) + \
-    "us\n\nF_ avg: " + str(np.average(data.f_l)*(1/(16000000))*10**6) + "us\nF_5 avg: " + str(np.average(data.f_5l)*(1/(16000000))*10**6) + "us\nF_50 avg: " + str(np.average(data.f_50l)*(1/(16000000))*10**6) + " us\nF_100 avg: " + str(np.average(data.f_100l)*(1/(16000000))*10**6) + \
-    "us\n\nINV avg: " + str(np.average(data.invl)*(1/(16000000))*10**6) + \
-    "us\n\nS avg: " + str(np.average(data.sl)*(1/(16000000))*10**6) + "us")
-
     fields   = np.matrix(['R_', 'R_5', 'R_50', 'R_100', 'F_', 'F_5', 'F_50', 'F_100', 'INV', 'S'])
     complete = np.matrix([data.r_l, data.r_5l, data.r_50l, data.r_100l, data.f_l, data.f_5l, data.f_50l, data.f_100l, data.invl, data.sl])
     with open("drive_" + writefile + "np.csv", "a") as analysis:
