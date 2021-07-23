@@ -95,11 +95,11 @@ void rx_done_callback(char *rxbuf) {										// Arduino will perform some funct
 	len = strlen(rxbuf);													// Save length of string to determine behavior
 	
 	if((rxbuf[0] == 'S' || rxbuf[0] == 's' )) {								// If the first char is 'S' we will STOP the driving motor
-		pwm_set_duty(0);
-		pwm_stop_motor();
-		portd_bit_clear(direction);
-	}																		//
-	else if(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch)))) {	//
+		pwm_set_duty(0);													// 
+		pwm_stop_motor();													// 
+		portd_bit_clear(direction);											// 
+	}																		// 
+	else if(PIND == (PIND & ~((1<<ForwardSwitch) | (1<<ReverseSwitch)))) {	// 
 		if(rxbuf[0] == 'F' || rxbuf[0] == 'f') {							// If the first char is 'F' we will be driving forward
 			int d = findnum(rxbuf);											//
 			portd_bit_clear(direction);										//
