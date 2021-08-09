@@ -20,10 +20,10 @@ volatile int infinite = 0;		// Global infinite flag for when pulsing should cont
 
 // Overflow Interrupt
 ISR(TIMER1_COMPA_vect) {											// Interrupt Service Routine for whenever TCNT = OCR1A
-	pulse_timer_isr();														// Call pulse_timer_isr
+	pulse_timer_isr();												// Call pulse_timer_isr
 }																	// 
 
-void pulse_timer_init(){													// Initialization value for pwm signal using TIMER1
+void pulse_timer_init(){											// Initialization value for pwm signal using TIMER1
 	// pwm at PB1													// 
 	DDRB |= (1 << DDB1);											// Set PB1 to output, else it will not be driven
 	TCCR1A = (1 << COM1A0);											// Enable COM1A0 to signify that the output on OC1A(PB1) should be toggled whenever TCNT1 = OCR1A
@@ -31,7 +31,7 @@ void pulse_timer_init(){													// Initialization value for pwm signal usin
 	TIMSK1 = (1 << OCIE1A);											// Toggle output compare interrupt enable
 }																	// 
 
-void pulse_timer_isr() {													// The function that gets called by the TIMER1_COMPA_vect
+void pulse_timer_isr() {											// The function that gets called by the TIMER1_COMPA_vect
 	if (steps > 0) {												// If the steps are greater than 0 then we will
 		steps--;													// subtract 1 from the steps, notating one toggle of voltage
 	}																// 
@@ -40,7 +40,7 @@ void pulse_timer_isr() {													// The function that gets called by the TIM
 	}																// 
 }																	// 
 
-void pulse_timer_set_spd(int freq) {										// Function that sets the speed of the PWM to a given frequency
+void pulse_timer_set_spd(int freq) {								// Function that sets the speed of the PWM to a given frequency
 	OCR1A = (FOSC/(freq * 16))-3;									// Performs calculation on what OCR1A must be to produce frequency at clk/8 prescaling
 //	DDRB |= (1 << DDB1);											// Enables DDB1, where the pulsing will be happening
 }																	// 
