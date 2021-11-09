@@ -1,5 +1,5 @@
 # AGCP
-This is where the code is located for my implementation of the AGCP microcontroller. It is subdivided into several sections.
+This is where the code is located for my implementation of the Autonomous Golf Cart Project Microcontroller. It is subdivided into several sections.
 
 - AGCP Code
 
